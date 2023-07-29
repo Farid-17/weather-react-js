@@ -2,9 +2,7 @@ import React from 'react'
 import { CONST, get_card_date, public_path } from '../helpers/general'
 
 export default function Card({ temp, date, icon }) {
-    const style = {
-
-    }, header = {
+    const style = {}, header = {
         backgroundColor: CONST.mainColor,
     }
 
