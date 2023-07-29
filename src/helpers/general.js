@@ -1,5 +1,10 @@
+import axios from "axios";
+
 export const CONST = {
     mainColor: '#3a86ff',
+    api: {
+        url: '',
+    }
 }
 
 export const public_path = (path) => {
@@ -15,4 +20,8 @@ export const get_card_date = (date) => {
         day: daysOfWeek[currentDate.getDay()],
         dt: `${monthsOfYear[currentDate.getMonth()]} ${currentDate.getDate()}`,
     };
+}
+
+export const get_weather = (callback) => {
+    axios.get(CONST.api.url).then(response => callback(response)).catch(error => console.error(error))
 }

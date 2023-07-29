@@ -11,19 +11,19 @@ export default function HomePage() {
             date: '07-29-2023',
         },
         {
-            temp: '27',
-            icon: 'day',
-            date: '07-29-2023',
+            temp: '21',
+            icon: 'cloudy-day-1',
+            date: '07-30-2023',
         },
         {
-            temp: '27',
-            icon: 'day',
-            date: '07-29-2023',
+            temp: '19',
+            icon: 'rainy-6',
+            date: '07-31-2023',
         },
         {
-            temp: '27',
-            icon: 'day',
-            date: '07-29-2023',
+            temp: '20',
+            icon: 'rainy-1',
+            date: '08-01-2023',
         },
     ]
 
