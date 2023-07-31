@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const CONST = {
+    lightColor: '#ffffff',
     mainColor: '#3a86ff',
     api: {
         // url: 'https://api.tomorrow.io/v4/timelines?location=40.75872069597532,-73.98529171943665&fields=temperature&timesteps=1h&units=metric&apikey=9HVqc4NtVELAo2Gx0VO3s4VxnQRn76Ic',
@@ -13,14 +14,33 @@ export const public_path = (path) => {
     return `${process.env.PUBLIC_URL}/${path}`;
 };
 
-export const get_card_date = (date) => {
+export const get_date_info = (date = null) => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        currentDate = new Date(date);
+        monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let _date = null
+
+    if (date == null) {
+        _date = new Date()
+    } else {
+        _date = new Date(date)
+    }
 
     return {
-        day: daysOfWeek[currentDate.getDay()],
-        dt: `${monthsOfYear[currentDate.getMonth()]} ${currentDate.getDate()}`,
+        day: _date.getDay() + 1,
+        month: _date.getMonth(),
+        year: _date.getFullYear(),
+        date: _date,
+        _day: daysOfWeek[_date.getDay()],
+        _month: monthsOfYear[_date.getMonth()],
+    }
+}
+
+export const get_card_date = (date) => {
+    const _date = get_date_info(date)
+
+    return {
+        day: _date._day,
+        dt: `${_date._month} ${_date.day}`,
     };
 }
 
@@ -38,15 +58,14 @@ export const get_weather_card_data = (weathers) => {
     let result = []
 
     for (const [index, weather] of weathers.entries()) {
-        if (index <= 0)
-            continue
-
         const values = weather.values
         result.push({
             key: index,
             date: weather.time,
             icon: get_weather_icon(values.weatherCodeMax),
             temp: parseInt(values.temperatureAvg),
+            temp_min: parseInt(values.temperatureMin),
+            temp_max: parseInt(values.temperatureMax),
         })
     }
 
